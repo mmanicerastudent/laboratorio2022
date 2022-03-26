@@ -45,11 +45,18 @@ int main()
             cout << "Ingrese password:" << endl;
             cin >> password;
 
-            sistema->agregarJugador(nickname, edad, password);
-
-            cout << "\n";
-
-            cout << "Jugador agregado exitosamente!" << endl;
+            try
+            {
+                sistema->agregarJugador(nickname, edad, password);
+                cout << "\n";
+                cout << "Jugador agregado exitosamente!" << endl;
+            }
+            catch(invalid_argument ex)
+            {
+                cout << "\n";
+                cout << ex.what() << endl;
+            }
+        
             break;
         }
         case 2:

@@ -1,7 +1,7 @@
 #ifndef DTJUEGO
 #define DTJUEGO
 #include <string>
-#include <TipoGenero.h>
+#include "TipoGenero.h"
 
 using namespace std;
 

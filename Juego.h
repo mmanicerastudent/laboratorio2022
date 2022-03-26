@@ -1,7 +1,8 @@
 #ifndef JUEGO
 #define JUEGO
+
 #include <string>
-#include <TipoGenero.h>
+#include "TipoGenero.h"
 
 using namespace std;
 
