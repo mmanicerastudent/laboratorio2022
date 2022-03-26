@@ -10,9 +10,7 @@ class DtPartida{
         DtPartida();
         DtPartida(DtFechaHora fecha, int duracion);
         DtFechaHora getFecha();
-        void setFecha(DtFechaHora fecha);
         int getDuracion();
-        void setDuracion(int duracion);
         ~DtPartida();
 };
 
