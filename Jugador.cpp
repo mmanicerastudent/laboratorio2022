@@ -30,3 +30,8 @@ string Jugador::getPassword() {
 void Jugador::setPassword(string password) {
     this->password = password;
 }
+
+DtJugador* Jugador::getDtJugador() {
+    DtJugador* dtJugador = new DtJugador(this->getNickname(), this->getEdad());
+    return dtJugador;
+}

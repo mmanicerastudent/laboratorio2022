@@ -1,6 +1,9 @@
 #ifndef JUGADOR
 #define JUGADOR
+
 #include <string>
+#include "DtJugador.h"
+
 using namespace std;
 
 class Jugador {
@@ -18,6 +21,7 @@ class Jugador {
         void setEdad(int edad);
         string getPassword();
         void setPassword(string password);
+        DtJugador* getDtJugador();
         ~Jugador();
 };
 
