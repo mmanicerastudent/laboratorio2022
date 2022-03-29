@@ -1,4 +1,5 @@
 #include "Juego.h"
+#include "DtJuego.h"
 
 Juego::Juego(){}
 Juego::Juego(string nombre, TipoGenero genero){
@@ -20,4 +21,10 @@ TipoGenero Juego::getGenero() {
 
 void Juego::setGenero(TipoGenero genero) {
     this->genero = genero;
+}
+
+DtJuego* Juego::getDtJuego() {
+    //agregar las horas y no dejar el cero
+    DtJuego* dtJuego = new DtJuego(this->getNombre(), this->getGenero(), 0);
+    return dtJuego;
 }

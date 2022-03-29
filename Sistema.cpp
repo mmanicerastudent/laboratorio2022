@@ -58,3 +58,47 @@ void Sistema::agregarVideojuego(string nombre, TipoGenero genero) {
     colJuegos.j[colJuegos.cant] = juego;
     colJuegos.cant++;
 }
+
+
+
+DtJuego** Sistema::obtenerVideoJuegos(int& cantidadVideoJuegos){
+     DtJuego** dtJuegos = new DtJuego*[colJuegos.cant];
+
+    for(int i = 0; i < colJuegos.cant; i++) {
+        DtJuego* dtJuego = colJuegos.j[i]->getDtJuego();
+        dtJuegos[i] = dtJuego;
+    }
+
+    cantidadVideoJuegos = colJuegos.cant;
+    return dtJuegos;
+
+}
+
+void Sistema::iniciarPartida(string nickname, string videojuego, DtPartida* datos){
+
+    bool encontre = false;
+    Jugador* jugadorPartida;
+    Juego* videojuegoPartida;
+
+    for(int i = 0; i < colJugadores.cant; i++) {
+        if(colJugadores.j[i]->getNickname() == nickname) {
+            encontre ==true;
+            jugadorPartida = colJugadores.j[i];
+        };
+    if (encontre==false){
+        throw invalid_argument("No existe un jugador con este nickname.");    
+        };
+    };
+    encontre = false;
+    for(int i = 0; i < colJuegos.cant; i++) {
+        if(colJuegos.j[i]->getNombre() == videojuego) {
+            encontre ==true;
+            videojuegoPartida = colJuegos.j[i];
+        };
+    if (encontre==false){
+        throw invalid_argument("No existe un juego con este nombre.");    
+        };
+    }
+
+
+} 

@@ -18,7 +18,8 @@ class DtJuego {
         void setTipoGenero(TipoGenero genero);
         TipoGenero getTipoGenero();
         void setTotalHorasJuegos(int totalHorasJuego);
-        int getTotalHorasJuegos();  
+        int getTotalHorasJuegos();
+        string traducirGenero();
         ~DtJuego();
 };
 

@@ -30,3 +30,19 @@ int DtJuego::getTotalHorasJuegos() {
 void DtJuego::setTotalHorasJuegos(int totalHorasJuego) {
     this->totalHorasJuego = totalHorasJuego;
 }
+
+string DtJuego::traducirGenero(){
+    
+    switch(this->genero){
+        case 0:
+            return "ACCION";
+        case 1:
+            return "AVENTURA";
+        case 2:
+            return "DEPORTE";
+        case 3:
+            return "OTRO";
+        default:
+            return "No genero";
+    }
+}

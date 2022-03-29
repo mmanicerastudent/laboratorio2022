@@ -3,6 +3,7 @@
 
 #include <string>
 #include "TipoGenero.h"
+#include "DtJuego.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class Juego {
         string getNombre();
         void setGenero(TipoGenero genero);
         TipoGenero getGenero();
+        DtJuego* getDtJuego();
         ~Juego();
 };
 

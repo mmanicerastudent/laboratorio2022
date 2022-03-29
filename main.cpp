@@ -20,6 +20,7 @@ int main()
         cout << "1 - Agregar Jugador" << endl;
         cout << "2 - Agregar Videojuego" << endl;
         cout << "3 - Obtener Jugadores" << endl;
+        cout << "4 - Obtener Videojuegos" << endl;
         cout << "----------------------------------------------------------" << endl;
         cout << "0 - Salir" << endl;
         cout << "==========================================================" << endl;
@@ -114,6 +115,25 @@ int main()
                     for (int i = 0; i < cant; i++)
                     {
                         cout << jugadores[i]->getNickname() << endl;
+                    }
+
+                    break;
+                }
+                case 4:
+                {
+                    cout << "\n";
+                    cout << "Listado de Juegos:" << endl;
+
+                    int cant = 0;
+                    DtJuego **juegos = sistema->obtenerVideoJuegos(cant);
+
+                    for (int i = 0; i < cant; i++)
+                    {
+                        cout << juegos[i]->getNombre() << endl;
+
+
+                        cout << juegos[i]->traducirGenero() << endl;
+                        cout << juegos[i]->getTotalHorasJuegos() << endl;
                     }
 
                     break;
