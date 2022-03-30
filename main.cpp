@@ -4,9 +4,12 @@
 
 using namespace std;
 
+Sistema* sistema;
+
+
 int main()
 {
-    Sistema *sistema = new Sistema();
+    sistema = new Sistema();
 
     /* ========== INTERFAZ ========== */
     int opt = 1;

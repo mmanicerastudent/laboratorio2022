@@ -3,73 +3,60 @@
 
 using namespace std;
 
-#define MAX_JUGADORES 30
-#define MAX_VIDEOJUEGOS 30
-#define MAX_PARTIDAS 100
-
-struct Jugadores {
-    Jugador* j[MAX_JUGADORES];
-    int cant;
-} colJugadores;
-
-struct Juegos {
-    Juego* j[MAX_VIDEOJUEGOS];
-    int cant;
-} colJuegos;
-
 Sistema::Sistema() {
-    colJugadores.cant = 0;
+    this->cantJugadores = 0;
+    this->cantJuegos = 0;   
 }
 
 void Sistema::agregarJugador(string nickname, int edad, string password){
     Jugador* jugador = new Jugador(nickname, edad, password);
 
-    for(int i = 0; i < colJugadores.cant; i++) {
-        if(colJugadores.j[i]->getNickname() == nickname) {
+    for(int i = 0; i < this->cantJugadores; i++) {
+        if(this->jugadores[i]->getNickname() == nickname) {
             throw invalid_argument("Ya existe un jugador con este nickname.");
         }
     }
 
-    colJugadores.j[colJugadores.cant] = jugador;
-    colJugadores.cant++;
+    this->jugadores[this->cantJugadores] = jugador;
+    this->cantJugadores++;    
 }
 
 DtJugador** Sistema::obtenerJugadores(int& cantJugadores) {
-    DtJugador** dtJugadores = new DtJugador*[colJugadores.cant];
+    DtJugador** dtJugadores = new DtJugador*[this->cantJugadores];
 
-    for(int i = 0; i < colJugadores.cant; i++) {
-        DtJugador* dtJugador = colJugadores.j[i]->getDtJugador();
+    for(int i = 0; i < this->cantJugadores; i++) {
+        DtJugador* dtJugador = this->jugadores[i]->getDtJugador();
         dtJugadores[i] = dtJugador;
     }
 
-    cantJugadores = colJugadores.cant;
+    cantJugadores = this->cantJugadores;
     return dtJugadores;
 }
 
 void Sistema::agregarVideojuego(string nombre, TipoGenero genero) {
     Juego* juego = new Juego(nombre, genero);
 
-    for(int i = 0; i < colJuegos.cant; i++) {
-        if(colJuegos.j[i]->getNombre() == nombre) {
+    for(int i = 0; i < this->cantJuegos; i++) {
+        if(this->juegos[i]->getNombre() == nombre) {
             throw invalid_argument("Ya existe un videojuego con este nombre.");
         }
     }
 
-    colJuegos.j[colJuegos.cant] = juego;
-    colJuegos.cant++;
+    this->juegos[this->cantJuegos] = juego;
+    this->cantJuegos++;
 }
 
 
 
 DtJuego** Sistema::obtenerVideoJuegos(int& cantidadVideoJuegos){
-     DtJuego** dtJuegos = new DtJuego*[colJuegos.cant];
+     DtJuego** dtJuegos = new DtJuego*[this->cantJuegos];
 
-    for(int i = 0; i < colJuegos.cant; i++) {
-        DtJuego* dtJuego = colJuegos.j[i]->getDtJuego();
+    for(int i = 0; i < this->cantJuegos; i++) {
+        DtJuego* dtJuego = this->juegos[i]->getDtJuego();
         dtJuegos[i] = dtJuego;
     }
 
-    cantidadVideoJuegos = colJuegos.cant;
+    cantidadVideoJuegos = this->cantJuegos;
     return dtJuegos;
 
 }
@@ -80,20 +67,20 @@ void Sistema::iniciarPartida(string nickname, string videojuego, DtPartida* dato
     Jugador* jugadorPartida;
     Juego* videojuegoPartida;
 
-    for(int i = 0; i < colJugadores.cant; i++) {
-        if(colJugadores.j[i]->getNickname() == nickname) {
+    for(int i = 0; i < this->cantJugadores; i++) {
+        if(this->jugadores[i]->getNickname() == nickname) {
             encontre ==true;
-            jugadorPartida = colJugadores.j[i];
+            jugadorPartida = this->jugadores[i];
         };
     if (encontre==false){
         throw invalid_argument("No existe un jugador con este nickname.");    
         };
     };
     encontre = false;
-    for(int i = 0; i < colJuegos.cant; i++) {
-        if(colJuegos.j[i]->getNombre() == videojuego) {
+    for(int i = 0; i < this->cantJuegos; i++) {
+        if(this->juegos[i]->getNombre() == videojuego) {
             encontre ==true;
-            videojuegoPartida = colJuegos.j[i];
+            videojuegoPartida =this->juegos[i];
         };
     if (encontre==false){
         throw invalid_argument("No existe un juego con este nombre.");    
