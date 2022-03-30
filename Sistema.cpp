@@ -61,31 +61,22 @@ DtJuego** Sistema::obtenerVideoJuegos(int& cantidadVideoJuegos){
 
 }
 
-void Sistema::iniciarPartida(string nickname, string videojuego, DtPartida* datos){
+void Sistema::iniciarPartida(string nickname, string videojuego, DtPartida* datos){} 
 
-    bool encontre = false;
-    Jugador* jugadorPartida;
-    Juego* videojuegoPartida;
-
+Jugador* Sistema::buscarJugador(string nickname){
     for(int i = 0; i < this->cantJugadores; i++) {
         if(this->jugadores[i]->getNickname() == nickname) {
-            encontre ==true;
-            jugadorPartida = this->jugadores[i];
-        };
-    if (encontre==false){
-        throw invalid_argument("No existe un jugador con este nickname.");    
+            return this->jugadores[i];
+        };           
+    };
+    throw invalid_argument("No existe un jugador con este nickname.");
+}
+
+Juego* Sistema::buscarJuego(string videojuego){
+     for(int i = 0; i < this->cantJuegos; i++) {
+        if(this->juegos[i]->getNombre() == videojuego) {
+            return this->juegos[i];
         };
     };
-    encontre = false;
-    for(int i = 0; i < this->cantJuegos; i++) {
-        if(this->juegos[i]->getNombre() == videojuego) {
-            encontre ==true;
-            videojuegoPartida =this->juegos[i];
-        };
-    if (encontre==false){
-        throw invalid_argument("No existe un juego con este nombre.");    
-        };
-    }
-
-
-} 
+    throw invalid_argument("No existe un juego con este nombre.");
+}
