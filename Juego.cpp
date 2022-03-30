@@ -1,5 +1,4 @@
 #include "Juego.h"
-#include "DtJuego.h"
 
 Juego::Juego(){}
 Juego::Juego(string nombre, TipoGenero genero){
@@ -27,4 +26,13 @@ DtJuego* Juego::getDtJuego() {
     //agregar las horas y no dejar el cero
     DtJuego* dtJuego = new DtJuego(this->getNombre(), this->getGenero(), 0);
     return dtJuego;
+}
+void Juego::addPartida(Partida* partida) {
+    this->partidas[this->tope] =partida;
+    this-> tope++;
+}
+
+Partida** Juego::getPartidas(int& cantPartidas) {
+    cantPartidas = this->tope;
+    return this->partidas;
 }

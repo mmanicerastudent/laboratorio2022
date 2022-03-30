@@ -1,7 +1,7 @@
 #include "PartidaMultijugador.h"
 
         PartidaMulijugador::PartidaMulijugador(){};
-        PartidaMulijugador::PartidaMulijugador(DtFechaHora fecha, int duracion, bool trasmitidaEnVivo, int cantParticipantes):Partida(fecha, duracion){
+        PartidaMulijugador::PartidaMulijugador(DtFechaHora fecha, int duracion, Jugador* jugador, bool trasmitidaEnVivo, int cantParticipantes):Partida(fecha, duracion, jugador){
             this->trasmitidaEnVivo = trasmitidaEnVivo;
             this->cantParticipantes = cantParticipantes;
         };

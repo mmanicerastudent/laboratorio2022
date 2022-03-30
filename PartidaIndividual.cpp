@@ -1,7 +1,7 @@
 #include "PartidaIndividual.h"
 
         PartidaIndividual::PartidaIndividual(){};
-        PartidaIndividual::PartidaIndividual(DtFechaHora fecha, int duracion, bool continuaPartidaAnterior):Partida(fecha, duracion){
+        PartidaIndividual::PartidaIndividual(DtFechaHora fecha, int duracion, Jugador* jugador, bool continuaPartidaAnterior):Partida(fecha, duracion, jugador){
             this->continuaPartidaAnterior = continuaPartidaAnterior;
         };
 

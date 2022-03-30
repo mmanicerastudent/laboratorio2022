@@ -1,7 +1,7 @@
 #include "Partida.h"
 
         Partida::Partida(){};
-        Partida::Partida(DtFechaHora fecha, int duracion){
+        Partida::Partida(DtFechaHora fecha, int duracion, Jugador* jugador){
             this->fecha = fecha;
             this->duracion = duracion;
         };
