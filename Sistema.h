@@ -3,9 +3,12 @@
 #include <string>
 
 #include "Jugador.h"
-#include "Juego.h"
-#include "DtPartida.h"
 #include "DtJuego.h"
+#include "Juego.h"
+#include "DtPartidaMultijugador.h"
+#include "PartidaMultijugador.h"
+#include "DtPartidaIndividual.h"
+#include "PartidaIndividual.h"
 
 #define MAX_JUGADORES 30
 #define MAX_VIDEOJUEGOS 30
@@ -27,8 +30,10 @@ class Sistema {
         void agregarVideojuego(string nombre, TipoGenero genero);
         DtJuego** obtenerVideoJuegos(int& cantVideojuegos);
         void iniciarPartida(string nickname, string videojuego, DtPartida* datos);
+        DtPartida** obtenerPartidas(string videojuego, int &cantPartidas);
         Jugador* buscarJugador(string nickname);
         Juego* buscarJuego(string videojuego);
+        DtFechaHora* fechaHoraActual();
         ~Sistema();
 };
 

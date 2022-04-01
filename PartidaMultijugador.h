@@ -1,25 +1,25 @@
 #ifndef PARTIDAMULTIJUGADOR
 #define PARTIDAMULTIJUGADOR
 #include "Partida.h"
+#include "DtPartidaMultijugador.h"
 
 
-class PartidaMulijugador:public Partida{
+class PartidaMultijugador:public Partida{
     
     private:
         bool trasmitidaEnVivo;
         int cantParticipantes;
 
     public:
-        PartidaMulijugador();
-        PartidaMulijugador(DtFechaHora fecha, int duracion, Jugador* jugador, bool trasmitidaEnVivo, int cantParticipantes);
+        PartidaMultijugador();
+        PartidaMultijugador(DtFechaHora* fecha, int duracion, bool trasmitidaEnVivo, int cantParticipantes, Jugador* jugador);
         void setTrasmitidaEnVivo(bool trasmitida);
         void setCantParticipantes(int cantParticipantes);
         bool getTransmitidaEnVivo();
         int getCantParticipantes();
         int darTotalHorasParticipantes();
-        ~PartidaMulijugador();
-
-
+        DtPartidaMultijugador* getDtPartidaMultijugador();
+        ~PartidaMultijugador();
 };
 
 #endif

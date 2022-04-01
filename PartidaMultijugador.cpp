@@ -1,21 +1,36 @@
 #include "PartidaMultijugador.h"
 
-        PartidaMulijugador::PartidaMulijugador(){};
-        PartidaMulijugador::PartidaMulijugador(DtFechaHora fecha, int duracion, Jugador* jugador, bool trasmitidaEnVivo, int cantParticipantes):Partida(fecha, duracion, jugador){
-            this->trasmitidaEnVivo = trasmitidaEnVivo;
-            this->cantParticipantes = cantParticipantes;
-        };
-        void PartidaMulijugador::setTrasmitidaEnVivo(bool trasmitida){
-            this->trasmitidaEnVivo = trasmitida;
-        };
-        void PartidaMulijugador::setCantParticipantes(int cantParticipantes){
-            this->cantParticipantes = cantParticipantes;
-        };
-        bool PartidaMulijugador::getTransmitidaEnVivo(){
-            return this->trasmitidaEnVivo;
-        };
-        int PartidaMulijugador::getCantParticipantes(){
-            return this->cantParticipantes;
-        };
-        int PartidaMulijugador::darTotalHorasParticipantes(){};
-        PartidaMulijugador::~PartidaMulijugador(){};
+PartidaMultijugador::PartidaMultijugador(){};
+
+PartidaMultijugador::PartidaMultijugador(DtFechaHora* fecha, int duracion, bool trasmitidaEnVivo, int cantParticipantes, Jugador* jugador):Partida(fecha, duracion, jugador){
+    this->trasmitidaEnVivo = trasmitidaEnVivo;
+    this->cantParticipantes = cantParticipantes;
+};
+
+void PartidaMultijugador::setTrasmitidaEnVivo(bool trasmitida){
+    this->trasmitidaEnVivo = trasmitida;
+};
+
+void PartidaMultijugador::setCantParticipantes(int cantParticipantes){
+    this->cantParticipantes = cantParticipantes;
+};
+
+bool PartidaMultijugador::getTransmitidaEnVivo(){
+    return this->trasmitidaEnVivo;
+};
+
+int PartidaMultijugador::getCantParticipantes(){
+    return this->cantParticipantes;
+};
+
+int PartidaMultijugador::darTotalHorasParticipantes(){
+    // todo
+    return 0;
+};
+
+DtPartidaMultijugador* PartidaMultijugador::getDtPartidaMultijugador() {
+    DtPartidaMultijugador* dtPartida = new DtPartidaMultijugador(this->getFecha(), this->getDuracion(), this->getTransmitidaEnVivo(), this->getCantParticipantes());
+    return dtPartida;
+}
+
+PartidaMultijugador::~PartidaMultijugador(){};

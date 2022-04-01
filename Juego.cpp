@@ -28,7 +28,7 @@ DtJuego* Juego::getDtJuego() {
     return dtJuego;
 }
 void Juego::addPartida(Partida* partida) {
-    this->partidas[this->tope] =partida;
+    this->partidas[this->tope] = partida;
     this-> tope++;
 }
 

@@ -9,7 +9,7 @@ class DtPartidaIndividual:public DtPartida{
         bool continuaPartidaAnterior;
     public:
         DtPartidaIndividual();
-        DtPartidaIndividual(DtFechaHora fecha, int duracion, bool continuaPartidaAnterior); 
+        DtPartidaIndividual(DtFechaHora* fecha, int duracion, bool continuaPartidaAnterior); 
         bool getContinuaPartidaAnterior();
         ~DtPartidaIndividual();
 
