@@ -15,7 +15,7 @@ bool PartidaIndividual::getContinuaPartidaAnterior(){
 };
 
 int PartidaIndividual::darTotalHorasParticipantes(){
-    return 0;
+    return this->getDuracion();
 };
 
 DtPartidaIndividual* PartidaIndividual::getDtPartidaIndividual() {

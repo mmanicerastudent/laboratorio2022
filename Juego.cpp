@@ -23,8 +23,16 @@ void Juego::setGenero(TipoGenero genero) {
 }
 
 DtJuego* Juego::getDtJuego() {
-    //agregar las horas y no dejar el cero
-    DtJuego* dtJuego = new DtJuego(this->getNombre(), this->getGenero(), 0);
+    int cantP;
+    int totalHorasJuego = 0;
+    Partida** partidas = this->getPartidas(cantP);
+
+    for (int i = 0; i < cantP; i++)
+    {
+            totalHorasJuego = totalHorasJuego+partidas[i]->darTotalHorasParticipantes();
+    }
+    
+    DtJuego* dtJuego = new DtJuego(this->getNombre(), this->getGenero(), totalHorasJuego);
     return dtJuego;
 }
 void Juego::addPartida(Partida* partida) {

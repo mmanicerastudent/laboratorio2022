@@ -214,8 +214,60 @@ int main()
                                 break;
                             }
                         case 2:
-                            {
-                                //todo para partidas multi
+                            { 
+                                int duracion;
+                                cout << "Indique la duración en horas de la partida:" << endl;
+                                cin >> duracion;
+
+                                int cantParticipantes;
+                                cout << "Indique la cantidad de participantes de la partida:" << endl;
+                                cin >> cantParticipantes;
+
+                                string nickname;
+                                cout << "Indique su nickname:" << endl;
+                                cin >> nickname;
+
+                                string nombreJuego;
+                                cout << "Indique el nombre del juego:" << endl;
+                                cin >> nombreJuego;
+
+                                bool trasmitidaEnVivo;
+                                int trasmitidaEnVivoOpt;
+                                cout << "¿Esta partida se transmitira en vivo?" << endl;
+                                cout << "1. Si" << endl;
+                                cout << "2. No" << endl;
+                                cin >> trasmitidaEnVivoOpt;
+                                
+                                switch(trasmitidaEnVivoOpt){ 
+                                    case 1:
+                                        {
+                                            trasmitidaEnVivo = true;
+                                            break;
+                                        }
+                                    case 2:
+                                    default:
+                                        {
+                                            trasmitidaEnVivo = false;
+                                            break;
+                                        }
+                                }
+
+                                Jugador* jugador = sistema->buscarJugador(nickname);
+                                if(jugador == NULL) {
+                                    cout << "No existe un jugador con el nickname ingresado." << endl;
+                                    break;
+                                }
+
+                                Juego* juego = sistema->buscarJuego(nombreJuego);
+                                if(juego == NULL) {
+                                    cout << "No existe ningún juego con el nombre ingresado." << endl;
+                                    break;
+                                }
+
+                                DtFechaHora* fechaHora = sistema->fechaHoraActual();
+                                PartidaMultijugador* partida = new PartidaMultijugador(fechaHora, duracion, trasmitidaEnVivo, cantParticipantes, jugador);
+
+                                sistema->iniciarPartida(nickname, nombreJuego, partida->getDtPartidaMultijugador());
                                 break;
                             }
                         case 0:   
