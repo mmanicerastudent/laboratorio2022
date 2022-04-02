@@ -33,6 +33,8 @@ class Sistema {
         DtPartida** obtenerPartidas(string videojuego, int &cantPartidas);
         Jugador* buscarJugador(string nickname);
         Juego* buscarJuego(string videojuego);
+        void printSuccess(string text);
+        void printError(string text);
         DtFechaHora* fechaHoraActual();
         ~Sistema();
 };

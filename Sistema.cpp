@@ -1,5 +1,6 @@
 #include "Sistema.h"
 #include <stdexcept>
+#include <iostream>
 
 using namespace std;
 
@@ -166,4 +167,26 @@ DtFechaHora *Sistema::fechaHoraActual()
 
     DtFechaHora *fechaHora = new DtFechaHora(dia, mes, anio, hora, minutos);
     return fechaHora;
+}
+
+void Sistema::printSuccess(string text)
+{
+    int n = text.length() + 10;
+    char c = '-';
+
+    cout << "\n";
+    cout << string(n, c) << endl;
+    cout << "| \u2713 - " << text <<  "   |" << endl;
+    cout << string(n, c) << endl;
+}
+
+void Sistema::printError(string text)
+{
+    int n = text.length() + 10;
+    char c = '-';
+
+    cout << "\n";
+    cout << string(n, c) << endl;
+    cout << "| \u00D7 - " << text <<  "   |" << endl;
+    cout << string(n, c) << endl;
 }

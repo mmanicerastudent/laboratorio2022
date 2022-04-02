@@ -1,8 +1,9 @@
+#include <iostream>
+
 #include "Sistema.h"
 #include "TipoGenero.h"
 #include "PartidaIndividual.h"
 #include "DtFechaHora.h"
-#include "iostream"
 
 using namespace std;
 
@@ -19,18 +20,18 @@ int main()
     while (opt != 0)
     {
 
-        cout << "==========================================================" << endl;
-        cout << "Bienvenido, elija una de las siguientes opciones:" << endl;
-        cout << "\n";
-        cout << "1 - Agregar Jugador" << endl;
-        cout << "2 - Agregar Videojuego" << endl;
-        cout << "3 - Obtener Jugadores" << endl;
-        cout << "4 - Obtener Videojuegos" << endl;
-        cout << "5 - Iniciar Partida" << endl;
-        cout << "6 - Obtener Partidas" << endl;
         cout << "----------------------------------------------------------" << endl;
-        cout << "0 - Salir" << endl;
-        cout << "==========================================================" << endl;
+        cout << "| Bienvenido, elija una de las siguientes opciones:      |" << endl;
+        cout << "| ------------------------------------------------------ |" << endl;
+        cout << "| 1 - Agregar Jugador                                    |" << endl;
+        cout << "| 2 - Agregar Videojuego                                 |" << endl;
+        cout << "| 3 - Obtener Jugadores                                  |" << endl;
+        cout << "| 4 - Obtener Videojuegos                                |" << endl;
+        cout << "| 5 - Iniciar Partida                                    |" << endl;
+        cout << "| 6 - Obtener Partidas                                   |" << endl;
+        cout << "| ------------------------------------------------------ |" << endl;
+        cout << "| 0 - Salir                                              |" << endl;
+        cout << "----------------------------------------------------------" << endl;
 
         cin >> opt;
 
@@ -41,30 +42,32 @@ int main()
                     string nickname, password;
                     int edad;
 
+                    cout << "\n";
                     cout << "Ingrese nickname:" << endl;
+                    cout << "-------------------------------" << endl;
                     cin >> nickname;
 
                     cout << "\n";
 
                     cout << "Ingrese edad:" << endl;
+                    cout << "-------------------------------" << endl;
                     cin >> edad;
 
                     cout << "\n";
 
+
                     cout << "Ingrese password:" << endl;
+                    cout << "-------------------------------" << endl;
                     cin >> password;
 
                     try
                     {
                         sistema->agregarJugador(nickname, edad, password);
-                        cout << "\n";
-                        cout << "Jugador agregado exitosamente!" << endl;
-             
+                        sistema->printSuccess("Jugador agregado exitosamente!");
                     }
                     catch(invalid_argument ex)
                     {
-                        cout << "\n";
-                        cout << ex.what() << endl;
+                        sistema->printError(ex.what());
                     }
                 
                     break;
@@ -75,10 +78,20 @@ int main()
                     TipoGenero genero;
                     int optGenero;
 
+                    cout << "\n";
                     cout << "Ingrese nombre:" << endl;
+                    cout << "-------------------------------" << endl;
                     cin >> nombre;
 
-                    cout << "\nIngrese tipo de genero" << endl << "\n1.Acccion\n2.Aventura\n3.Deporte\n4.Otros\n\nIngrese valor: ";
+                    cout << "\n";
+
+                    cout << "Ingrese el tipo de género:" << endl;
+                    cout << "-------------------------------" << endl;
+                    cout << "1. Accción" << endl; 
+                    cout << "2. Aventura" << endl; 
+                    cout << "3. Deporte" << endl; 
+                    cout << "4. Otros" << endl; 
+
                     cin >> optGenero;
 
                     switch(optGenero){
@@ -104,13 +117,11 @@ int main()
                             throw invalid_argument("Número ingresado inválido");
                         }
                         sistema->agregarVideojuego(nombre, genero);
-                        cout << "\n";
-                        cout << "Juego agregado exitosamente!" << endl;
+                        sistema->printSuccess("Juego agregado exitosamente!");
                     }
                     catch(invalid_argument ex)
-                    {
-                        cout << "\n";
-                        cout << ex.what() << endl;
+                    { 
+                        sistema->printError(ex.what());
                     }
                     break;
                 }
@@ -121,7 +132,7 @@ int main()
 
                     int cant = 0;
                     DtJugador **jugadores = sistema->obtenerJugadores(cant);
-
+                    
                     // Contemplar caso en que no haya jugadores
                     for (int i = 0; i < cant; i++)
                     {
@@ -152,10 +163,12 @@ int main()
                 {
                     int optPartida;
 
+                    cout << "\n";
+
                     cout << "¿Qué tipo de partida deseas iniciar?" << endl;
+                    cout << "------------------------------------------------" << endl;
                     cout << "1. Partida individual" << endl;
                     cout << "2. Partida multijugador" << endl;
-                    cout << "0. Atrás" << endl;
 
                     cin >> optPartida;
 
@@ -163,20 +176,28 @@ int main()
                         case 1: 
                             {
                                 int duracion;
+                                cout << "\n";
                                 cout << "Indique la duración en horas de la partida:" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cin >> duracion;
 
                                 string nickname;
+                                cout << "\n";
                                 cout << "Indique su nickname:" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cin >> nickname;
 
                                 string nombreJuego;
+                                cout << "\n";
                                 cout << "Indique el nombre del juego:" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cin >> nombreJuego;
 
                                 bool continuaPartida;
                                 int continuaPartidaOpt;
+                                cout << "\n";
                                 cout << "¿Es una continuación de otra partida?" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cout << "1. Si" << endl;
                                 cout << "2. No" << endl;
                                 cin >> continuaPartidaOpt;
@@ -197,13 +218,13 @@ int main()
 
                                 Jugador* jugador = sistema->buscarJugador(nickname);
                                 if(jugador == NULL) {
-                                    cout << "No existe un jugador con el nickname ingresado." << endl;
+                                    sistema->printError("No existe un jugador con el nickname ingresado.");
                                     break;
                                 }
 
                                 Juego* juego = sistema->buscarJuego(nombreJuego);
                                 if(juego == NULL) {
-                                    cout << "No existe ningún juego con el nombre ingresado." << endl;
+                                    sistema->printError("No existe ningún juego con el nombre ingresado.");
                                     break;
                                 }
 
@@ -211,29 +232,40 @@ int main()
                                 PartidaIndividual* partida = new PartidaIndividual(fechaHora, duracion, continuaPartida, jugador);
 
                                 sistema->iniciarPartida(nickname, nombreJuego, partida->getDtPartidaIndividual());
+                                sistema->printSuccess("Partida iniciada!");
                                 break;
                             }
                         case 2:
                             { 
                                 int duracion;
+                                cout << "\n";
                                 cout << "Indique la duración en horas de la partida:" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cin >> duracion;
 
                                 int cantParticipantes;
+                                cout << "\n";
                                 cout << "Indique la cantidad de participantes de la partida:" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cin >> cantParticipantes;
 
                                 string nickname;
+                                cout << "\n";
                                 cout << "Indique su nickname:" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cin >> nickname;
 
                                 string nombreJuego;
+                                cout << "\n";
                                 cout << "Indique el nombre del juego:" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cin >> nombreJuego;
 
                                 bool trasmitidaEnVivo;
                                 int trasmitidaEnVivoOpt;
+                                cout << "\n";
                                 cout << "¿Esta partida se transmitira en vivo?" << endl;
+                                cout << "------------------------------------------------" << endl;
                                 cout << "1. Si" << endl;
                                 cout << "2. No" << endl;
                                 cin >> trasmitidaEnVivoOpt;
@@ -254,13 +286,13 @@ int main()
 
                                 Jugador* jugador = sistema->buscarJugador(nickname);
                                 if(jugador == NULL) {
-                                    cout << "No existe un jugador con el nickname ingresado." << endl;
+                                    sistema->printError("No existe un jugador con el nickname ingresado.");
                                     break;
                                 }
 
                                 Juego* juego = sistema->buscarJuego(nombreJuego);
                                 if(juego == NULL) {
-                                    cout << "No existe ningún juego con el nombre ingresado." << endl;
+                                    sistema->printError("No existe ningún juego con el nombre ingresado.");    
                                     break;
                                 }
 
@@ -268,9 +300,9 @@ int main()
                                 PartidaMultijugador* partida = new PartidaMultijugador(fechaHora, duracion, trasmitidaEnVivo, cantParticipantes, jugador);
 
                                 sistema->iniciarPartida(nickname, nombreJuego, partida->getDtPartidaMultijugador());
+                                sistema->printSuccess("Partida iniciada!");
                                 break;
                             }
-                        case 0:   
                         default:
                             break;
                     }          
