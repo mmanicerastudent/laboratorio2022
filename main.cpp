@@ -47,11 +47,23 @@ int main()
                     cout << "-------------------------------" << endl;
                     cin >> nickname;
 
+                    if (nickname.length() > MAX_NICKNAME) 
+                    {
+                        sistema->printError("El nickname no puede tener mas de 15 caracteres.");
+                        break;
+                    }
+
                     cout << "\n";
 
                     cout << "Ingrese edad:" << endl;
                     cout << "-------------------------------" << endl;
                     cin >> edad;
+
+                    if (to_string(edad).length() > MAX_EDAD) 
+                    {
+                        sistema->printError("Edad Inválida");
+                        break;
+                    }
 
                     cout << "\n";
 
@@ -127,18 +139,14 @@ int main()
                 }
             case 3:
                 {
-                    cout << "\n";
-                    cout << "Listado de jugadores:" << endl;
-
                     int cant = 0;
                     DtJugador **jugadores = sistema->obtenerJugadores(cant);
                     
-                    // Contemplar caso en que no haya jugadores
-                    for (int i = 0; i < cant; i++)
-                    {
-                        cout << jugadores[i]->getNickname() << endl;
+                    if (cant > 0) {
+                        sistema->printJugadores(jugadores, cant);                       
+                    } else {
+                        sistema->printError("No hay jugadores para listar.");
                     }
-
                     break;
                 }
             case 4:
@@ -149,14 +157,16 @@ int main()
                     int cant = 0;
                     DtJuego **juegos = sistema->obtenerVideoJuegos(cant);
 
-                    // Contemplar caso en que no haya videojuegos
-                    for (int i = 0; i < cant; i++)
-                    {
-                        cout << juegos[i]->getNombre() << endl;
-                        cout << juegos[i]->traducirGenero() << endl;
-                        cout << juegos[i]->getTotalHorasJuegos() << endl;
+                    if (cant > 0) {
+                        for (int i = 0; i < cant; i++)
+                        {
+                            cout << juegos[i]->getNombre() << endl;
+                            cout << juegos[i]->traducirGenero() << endl;
+                            cout << juegos[i]->getTotalHorasJuegos() << endl;
+                        }
+                    } else {
+                        sistema->printError("No hay videojuegos para listar.");
                     }
-
                     break;
                 }
             case 5:
@@ -209,11 +219,13 @@ int main()
                                             break;
                                         }
                                     case 2:
-                                    default:
                                         {
                                             continuaPartida = false;
                                             break;
                                         }
+                                    default:
+                                        sistema->printError("Opcion no valida!");
+                                        break;
                                 }
 
                                 Jugador* jugador = sistema->buscarJugador(nickname);
@@ -277,11 +289,12 @@ int main()
                                             break;
                                         }
                                     case 2:
-                                    default:
                                         {
                                             trasmitidaEnVivo = false;
                                             break;
                                         }
+                                    default:
+                                        sistema->printError("Opcion no valida!");
                                 }
 
                                 Jugador* jugador = sistema->buscarJugador(nickname);
@@ -304,6 +317,7 @@ int main()
                                 break;
                             }
                         default:
+                            sistema->printError("Opcion no valida!");
                             break;
                     }          
                     break;  
@@ -323,9 +337,10 @@ int main()
                             cout << partidas[i]->getDuracion() << endl;
                         }
 
-                    } catch (invalid_argument ex) {
-                        cout << "\n";
-                        cout << ex.what() << endl;                        
+                    } 
+                    catch(invalid_argument ex) 
+                    {
+                        sistema->printError(ex.what());                     
                     }
 
                     break;
@@ -335,7 +350,7 @@ int main()
                     break;
                 }
             default:
-                cout << "Opción no válida." << endl;
+                sistema->printError("Opción no válida.");
                 break;
             }
     }

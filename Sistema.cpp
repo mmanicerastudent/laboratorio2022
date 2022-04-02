@@ -190,3 +190,22 @@ void Sistema::printError(string text)
     cout << "| \u00D7 - " << text <<  "   |" << endl;
     cout << string(n, c) << endl;
 }
+
+void Sistema::printJugadores(DtJugador** jugadores, int cant)
+{
+    cout << "\n";
+    cout << "Listado de jugadores: " << endl;
+    cout << "--------------------------" << endl;
+    cout << "| Nombre         | Edad  |" << endl;
+    cout << "|------------------------|" << endl;
+
+    for (int i = 0; i < cant; i++)
+    {
+        int cantEspaciosNickname = MAX_NICKNAME - jugadores[i]->getNickname().length();
+        int cantEspaciosEdad = 5 - to_string(jugadores[i]->getEdad()).length();
+        char e = ' ';
+        cout <<  "| " + jugadores[i]->getNickname() + string(cantEspaciosNickname, e) + "| " + to_string(jugadores[i]->getEdad()) + string(cantEspaciosEdad, e) + " |" << endl;
+    }
+
+    cout << "--------------------------" << endl;
+}

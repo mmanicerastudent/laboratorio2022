@@ -14,6 +14,9 @@
 #define MAX_VIDEOJUEGOS 30
 #define MAX_PARTIDAS 100
 
+#define MAX_NICKNAME 15
+#define MAX_EDAD 3
+
 using namespace std;
 
 class Sistema {
@@ -36,6 +39,7 @@ class Sistema {
         void printSuccess(string text);
         void printError(string text);
         DtFechaHora* fechaHoraActual();
+        void printJugadores(DtJugador** jugadores, int cant);
         ~Sistema();
 };
 
