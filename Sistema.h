@@ -13,7 +13,7 @@
 #define MAX_JUGADORES 30
 #define MAX_VIDEOJUEGOS 30
 #define MAX_PARTIDAS 100
-
+#define MAX_NOMBREPARTIDA 25
 #define MAX_NICKNAME 25
 #define MAX_EDAD 3
 
@@ -40,6 +40,7 @@ class Sistema {
         void printError(string text);
         DtFechaHora* fechaHoraActual();
         void printJugadores(DtJugador** jugadores, int cant);
+        void printJuego(DtJuego** juego, int cant);
         void printPartidasMultijugador(DtPartida** partidas, int cant, string juego);
         void printPartidasIndividuales(DtPartida** partidas, int cant, string juego);
         ~Sistema();

@@ -146,19 +146,12 @@ int main()
                 }
             case 4:
                 {
-                    cout << "\n";
-                    cout << "Listado de Juegos:" << endl;
 
                     int cant = 0;
                     DtJuego **juegos = sistema->obtenerVideoJuegos(cant);
 
                     if (cant > 0) {
-                        for (int i = 0; i < cant; i++)
-                        {
-                            cout << juegos[i]->getNombre() << endl;
-                            cout << juegos[i]->traducirGenero() << endl;
-                            cout << juegos[i]->getTotalHorasJuegos() << endl;
-                        }
+                        sistema->printJuego(juegos, cant);
                     } else {
                         sistema->printError("No hay videojuegos para listar.");
                     }

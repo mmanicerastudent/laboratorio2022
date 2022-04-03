@@ -30,7 +30,7 @@ DtJuego* Juego::getDtJuego() {
     for (int i = 0; i < cantP; i++)
     {
         totalHorasJuego = totalHorasJuego+partidas[i]->darTotalHorasParticipantes();
-    }
+    } 
     
     DtJuego* dtJuego = new DtJuego(this->getNombre(), this->getGenero(), totalHorasJuego);
     return dtJuego;
