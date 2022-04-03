@@ -1,6 +1,10 @@
 #ifndef DTFECHAHORA
 #define DTFECHAHORA
 
+#include <string>
+
+using namespace std;
+
 class DtFechaHora{
     private:
         int dia;
@@ -16,6 +20,7 @@ class DtFechaHora{
         int getAnio();
         int getHora();
         int getMinuto();
+        string format();
         ~DtFechaHora();
 };
 

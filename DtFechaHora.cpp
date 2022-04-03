@@ -39,4 +39,29 @@ int DtFechaHora::getMinuto(){
     return this->minuto;
 };
 
+string DtFechaHora::format(){
+    string dia = to_string(this->getDia());
+    if(dia.length() == 1){
+        dia = "0" + dia;
+    }
+
+    string mes = to_string(this->getMes());
+    if(mes.length() == 1){
+        mes = "0" + mes;
+    }
+    
+    string hora = to_string(this->getHora());
+    if(hora.length() == 1){
+        hora = "0" + hora;
+    }
+
+    string minutos = to_string(this->getMinuto());
+    if(minutos.length() == 1){
+        minutos = "0" + minutos;
+    }
+
+    string fecha = dia + "/" + mes + "/" + to_string(this->getAnio()) + " " + hora + ":" + minutos;
+    return fecha;
+}
+
 DtFechaHora::~DtFechaHora(){}

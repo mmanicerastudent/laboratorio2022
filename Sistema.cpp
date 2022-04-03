@@ -71,13 +71,13 @@ void Sistema::iniciarPartida(string nickname, string videojuego, DtPartida *dato
     Jugador *jugador = this->buscarJugador(nickname);
     if (jugador == NULL)
     {
-        throw invalid_argument("No existe ningún jugador con este nickname.");
+        throw invalid_argument("No existe ningun jugador con este nickname.");
     }
 
     Juego *juego = this->buscarJuego(videojuego);
     if (juego == NULL)
     {
-        throw invalid_argument("No existe ningún videojuego con este nombre.");
+        throw invalid_argument("No existe ningun videojuego con este nombre.");
     }
 
     DtPartidaMultijugador *dtm = dynamic_cast<DtPartidaMultijugador *>(datos);
@@ -102,7 +102,7 @@ DtPartida **Sistema::obtenerPartidas(string videojuego, int &cantPartidas)
     Juego *juego = this->buscarJuego(videojuego);
     if (juego == NULL)
     {
-        throw invalid_argument("No existe ningún videojuego con este nombre.");
+        throw invalid_argument("No existe ningun videojuego con este nombre.");
     }
 
     int cantP;
@@ -176,7 +176,7 @@ void Sistema::printSuccess(string text)
 
     cout << "\n";
     cout << string(n, c) << endl;
-    cout << "| \u2713 - " << text <<  "   |" << endl;
+    cout << "| \u2713 - " << text << "   |" << endl;
     cout << string(n, c) << endl;
 }
 
@@ -187,25 +187,121 @@ void Sistema::printError(string text)
 
     cout << "\n";
     cout << string(n, c) << endl;
-    cout << "| \u00D7 - " << text <<  "   |" << endl;
+    cout << "| \u00D7 - " << text << "   |" << endl;
     cout << string(n, c) << endl;
 }
 
-void Sistema::printJugadores(DtJugador** jugadores, int cant)
+void Sistema::printJugadores(DtJugador **jugadores, int cant)
 {
     cout << "\n";
-    cout << "Listado de jugadores: " << endl;
-    cout << "--------------------------" << endl;
-    cout << "| Nombre         | Edad  |" << endl;
-    cout << "|------------------------|" << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "| Listado de jugadores              |" << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "| Nombre                    | Edad  |" << endl;
+    cout << "|-----------------------------------|" << endl;
 
     for (int i = 0; i < cant; i++)
     {
         int cantEspaciosNickname = MAX_NICKNAME - jugadores[i]->getNickname().length();
         int cantEspaciosEdad = 5 - to_string(jugadores[i]->getEdad()).length();
         char e = ' ';
-        cout <<  "| " + jugadores[i]->getNickname() + string(cantEspaciosNickname, e) + "| " + to_string(jugadores[i]->getEdad()) + string(cantEspaciosEdad, e) + " |" << endl;
+        cout << "| " + jugadores[i]->getNickname() + string(cantEspaciosNickname, e) + " | " + to_string(jugadores[i]->getEdad()) + string(cantEspaciosEdad, e) + " |" << endl;
     }
 
-    cout << "--------------------------" << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "\n";
+}
+
+void Sistema::printPartidasMultijugador(DtPartida **partidas, int cant, string juego)
+{
+    bool hayPartidasMultijugador = false;
+    for (int i = 0; i < cant; i++) {
+        DtPartidaMultijugador *dtm = dynamic_cast<DtPartidaMultijugador *>(partidas[i]);
+        if (dtm != NULL) {
+            hayPartidasMultijugador = true;
+            break;
+        }
+    }
+    
+    if(hayPartidasMultijugador == true) {
+        char e = ' ';
+        int cantCaracteresTitulo = 62;
+
+        cout << "\n";
+        cout << "-----------------------------------------------------------------------------------------------------" << endl;
+        cout << "|  Listado de partidas multijugador: " << juego << string(cantCaracteresTitulo - juego.length(), e) << " |" << endl;
+        cout << "-----------------------------------------------------------------------------------------------------" << endl;
+        cout << "| Fecha de comienzo      | Cant. de participantes | Duracion (en horas)    | ¿Es en vivo?           |" << endl;
+        cout << "|---------------------------------------------------------------------------------------------------|" << endl;
+
+        for (int i = 0; i < cant; i++)
+        {
+            DtPartidaMultijugador *dtm = dynamic_cast<DtPartidaMultijugador *>(partidas[i]);
+            if (dtm != NULL)
+            {
+                int cantCaracteres = 23;               
+
+                string fecha = dtm->getFecha()->format();
+                string cantParticipantes = to_string(dtm->getCantParticipantes());
+                string duracion = to_string(dtm->getDuracion());
+                string enVivo = dtm->getTransmitidaEnVivo() ? "Si" : "No";
+
+                cout << "| " << fecha << string(cantCaracteres - fecha.length(), e) << "| " << cantParticipantes << 
+                string(cantCaracteres - cantParticipantes.length(), e) << "| " << duracion << 
+                string(cantCaracteres - duracion.length(), e) << "| " << enVivo << 
+                string(cantCaracteres - enVivo.length(), e) << "|" << endl;
+            }
+        }
+
+        cout << "-----------------------------------------------------------------------------------------------------" << endl;
+        cout << "\n";
+    }else{
+        throw invalid_argument("No hay partidas multijugador para listar.");
+    }
+}
+
+void Sistema::printPartidasIndividuales(DtPartida **partidas, int cant, string juego)
+{
+    bool hayPartidasIndividuales = false;
+    for (int i = 0; i < cant; i++) {
+        DtPartidaIndividual *dti = dynamic_cast<DtPartidaIndividual *>(partidas[i]);
+        if (dti != NULL) {
+            hayPartidasIndividuales = true;
+            break;
+        }
+    }
+    
+    if(hayPartidasIndividuales == true) {
+        char e = ' ';
+        int cantCaracteresTitulo = 49;
+
+        cout << "\n";
+        cout << "----------------------------------------------------------------------------------------" << endl;
+        cout << "|  Listado de partidas individuales: " << juego << string(cantCaracteresTitulo - juego.length(), e) << " |" << endl;
+        cout << "----------------------------------------------------------------------------------------" << endl;
+        cout << "| Fecha de comienzo          | Continua partida anterior  | Duracion (en horas)        |" << endl;
+        cout << "|--------------------------------------------------------------------------------------|" << endl;
+
+        for (int i = 0; i < cant; i++)
+        {
+            DtPartidaIndividual *dti = dynamic_cast<DtPartidaIndividual *>(partidas[i]);
+            if (dti != NULL)
+            {
+                int cantCaracteres = 27;               
+
+                string fecha = dti->getFecha()->format();
+                string continuaPartida = dti->getContinuaPartidaAnterior() ? "Si" : "No";
+                string duracion = to_string(dti->getDuracion());
+
+                cout << "| " << fecha << string(cantCaracteres - fecha.length(), e) << "| " << continuaPartida << 
+                string(cantCaracteres - continuaPartida.length(), e) << "| " << duracion << 
+                string(cantCaracteres - duracion.length(), e) << "|" << endl;
+            }
+        }
+
+        cout << "----------------------------------------------------------------------------------------" << endl;
+        cout << "\n";
+    }else{
+        throw invalid_argument("No hay partidas individuales para listar.");
+    }
 }

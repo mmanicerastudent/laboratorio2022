@@ -31,8 +31,7 @@ void DtJuego::setTotalHorasJuegos(int totalHorasJuego) {
     this->totalHorasJuego = totalHorasJuego;
 }
 
-string DtJuego::traducirGenero(){
-    
+string DtJuego::traducirGenero(){    
     switch(this->genero){
         case 0:
             return "ACCION";

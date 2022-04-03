@@ -15,9 +15,4 @@ int DtPartidaMultijugador::getCantParticipantes(){
     return this->cantParticipantes;
 };
 
-int DtPartidaMultijugador::darTotalHorasParticipantes(){
-    // todo
-    return 0;
-};
-
 DtPartidaMultijugador::~DtPartidaMultijugador(){};

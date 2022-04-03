@@ -61,7 +61,7 @@ int main()
 
                     if (to_string(edad).length() > MAX_EDAD) 
                     {
-                        sistema->printError("Edad Inválida");
+                        sistema->printError("Edad Invalida");
                         break;
                     }
 
@@ -96,38 +96,33 @@ int main()
                     cin >> nombre;
 
                     cout << "\n";
-
                     cout << "Ingrese el tipo de género:" << endl;
                     cout << "-------------------------------" << endl;
                     cout << "1. Accción" << endl; 
                     cout << "2. Aventura" << endl; 
                     cout << "3. Deporte" << endl; 
                     cout << "4. Otros" << endl; 
-
                     cin >> optGenero;
 
-                    switch(optGenero){
-                        case 1:
-                            genero = ACCION;
-                            break;
-                        case 2:
-                            genero = AVENTURA;
-                            break;
-                        case 3:
-                            genero = DEPORTE;
-                            break;
-                        case 4:
-                            genero = OTRO;
-                            break;
-                        default:
-                            break;
-                    }
-
-                    try
-                    {       
-                        if(optGenero < 1 || optGenero > 5) {
-                            throw invalid_argument("Número ingresado inválido");
+                    try {                               
+                        switch(optGenero){
+                            case 1:
+                                genero = ACCION;
+                                break;
+                            case 2:
+                                genero = AVENTURA;
+                                break;
+                            case 3:
+                                genero = DEPORTE;
+                                break;
+                            case 4:
+                                genero = OTRO;
+                                break;
+                            default:
+                                throw invalid_argument("Opcion invalida");
+                                break;
                         }
+
                         sistema->agregarVideojuego(nombre, genero);
                         sistema->printSuccess("Juego agregado exitosamente!");
                     }
@@ -236,7 +231,7 @@ int main()
 
                                 Juego* juego = sistema->buscarJuego(nombreJuego);
                                 if(juego == NULL) {
-                                    sistema->printError("No existe ningún juego con el nombre ingresado.");
+                                    sistema->printError("No existe ningun juego con el nombre ingresado.");
                                     break;
                                 }
 
@@ -305,7 +300,7 @@ int main()
 
                                 Juego* juego = sistema->buscarJuego(nombreJuego);
                                 if(juego == NULL) {
-                                    sistema->printError("No existe ningún juego con el nombre ingresado.");    
+                                    sistema->printError("No existe ningun juego con el nombre ingresado.");    
                                     break;
                                 }
 
@@ -326,17 +321,35 @@ int main()
                 {
                     string nombreJuego;
                     cout << "Indique el nombre del juego:" << endl;
-                    cin >> nombreJuego;
+                    cout << "---------------------------------------" << endl;
+                    cin >> nombreJuego;                
                     
-                    int cantPartidas = 0;
+                    int tipoPartida;
+                    cout << "\n";
+                    cout << "¿Que tipo de partidas desea obtener?" << endl;
+                    cout << "------------------------------------------------" << endl;
+                    cout << "1. Individuales" << endl;
+                    cout << "2. Multijugador" << endl;
+                    cin >> tipoPartida;
+                                                            
                     try {
+                        int cantPartidas = 0;
                         DtPartida** partidas = sistema->obtenerPartidas(nombreJuego, cantPartidas);
-                    
-                        for (int i = 0; i < cantPartidas; i++)
-                        {
-                            cout << partidas[i]->getDuracion() << endl;
-                        }
 
+                        switch (tipoPartida) {
+                            case 1:
+                                {                            
+                                    sistema->printPartidasIndividuales(partidas, cantPartidas, nombreJuego);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    sistema->printPartidasMultijugador(partidas, cantPartidas, nombreJuego);
+                                    break;
+                                }
+                            default:
+                                throw invalid_argument("Opcion invalida");
+                        }
                     } 
                     catch(invalid_argument ex) 
                     {
@@ -350,7 +363,7 @@ int main()
                     break;
                 }
             default:
-                sistema->printError("Opción no válida.");
+                sistema->printError("Opcion invalida.");
                 break;
             }
     }

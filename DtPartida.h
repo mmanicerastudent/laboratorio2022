@@ -11,7 +11,7 @@ class DtPartida{
         DtPartida(DtFechaHora* fecha, int duracion);
         DtFechaHora* getFecha();
         int getDuracion();
-        virtual ~DtPartida() = 0; // si no hago al menos una funcion virtual da error al usar dynamic_cast
+        virtual ~DtPartida() = 0;
 };
 
 #endif

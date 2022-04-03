@@ -7,10 +7,10 @@ make
 
 ## Ejecutar:
 ```
-./sistema
+make run
 ```
 
-## Eliminar archivos:
+## Eliminar archivos compilados:
 ```
 make clear
 ```

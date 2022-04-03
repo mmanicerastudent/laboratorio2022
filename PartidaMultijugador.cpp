@@ -24,8 +24,8 @@ int PartidaMultijugador::getCantParticipantes(){
 };
 
 int PartidaMultijugador::darTotalHorasParticipantes(){
-   int duracionP = this->getDuracion();
-   int cantP =this->getCantParticipantes();
+    int duracionP = this->getDuracion();
+    int cantP =this->getCantParticipantes();
    
     return duracionP*cantP;
 };

@@ -14,10 +14,7 @@ class DtPartidaMultijugador:public DtPartida{
         DtPartidaMultijugador(DtFechaHora* fecha, int duracion, bool trasmitidaEnVivo, int cantParticipantes);
         bool getTransmitidaEnVivo();
         int getCantParticipantes();
-        int darTotalHorasParticipantes();
         ~DtPartidaMultijugador();
-
-
 };
 
 #endif
