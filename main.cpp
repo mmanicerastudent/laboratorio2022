@@ -283,7 +283,7 @@ int main()
                                         }
                                     default:
                                         sistema->printError("Opcion no valida!");
-                                }
+                                } 
 
                                 Jugador* jugador = sistema->buscarJugador(nickname);
                                 if(jugador == NULL) {
